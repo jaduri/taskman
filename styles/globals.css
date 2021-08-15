@@ -26,3 +26,11 @@ h2 {
 h3 {
   margin: 0.5rem auto;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}

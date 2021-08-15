@@ -17,6 +17,6 @@
   display: flex;
 }
 
-.add-task > input {
+.add-task > form > input {
   flex-grow: 1;
 }

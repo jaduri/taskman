@@ -22,7 +22,7 @@ export default function Column({ title }) {
         <div className={styles["column-head"]}>
           <h3 className={styles["column-title"]}>{ title }</h3>
           <div className={styles["add-task"]}>
-            <form onSubmit={addTask}>
+            <form onSubmit={addTask} className="flex flex-grow">
               <input value={input} onChange={handleInput} />
               <button type="submit">Add</button>
             </form>
