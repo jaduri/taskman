@@ -1,0 +1,22 @@
+.column {
+  background-color: lightgray;
+  margin-right: 1rem;
+  padding: 3px;
+  width: 250px;
+}
+
+.column-head {
+  margin-bottom: 8px;
+}
+
+.column-title {
+  font-weight: 500;
+}
+
+.add-task {
+  display: flex;
+}
+
+.add-task > input {
+  flex-grow: 1;
+}

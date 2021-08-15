@@ -14,3 +14,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+h1 {
+  margin: 1rem 0;
+}
+
+h2 {
+  margin: 0.8rem auto;
+}
+
+h3 {
+  margin: 0.5rem auto;
+}
