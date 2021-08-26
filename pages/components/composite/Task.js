@@ -10,3 +10,11 @@ export default function Task({ task, setTasks }) {
     </div>
   )
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      task: {}
+    }
+  }
+}
