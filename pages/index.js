@@ -1,9 +1,38 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Column from './components/container/Column.js'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [ tasks, setTasks ] = useState([]);
+  const [ filteredTasks, setFilteredTasks ] = useState({});
+
+  useEffect(() => {
+    fetch(`/api/tasks`)
+        .then(res => res.json())
+        .then(res => {
+          setTasks(state => res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }, []);
+
+  useEffect(() => {
+    let columns = {};
+
+    // filter all tasks into columns
+    tasks.map((item) => {
+      if (!columns[item.column]) {
+        columns[item.column] = [];
+      }
+      columns[item.column].push(item);
+    });
+
+    setFilteredTasks(state => columns);
+  }, [tasks]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,24 +47,15 @@ export default function Home() {
         </h1>
 
         <div className={styles.board}>
-          <Column title="Work"></Column>
-          <Column title="Uni"></Column>
-          <Column title="Chores"></Column>
-          <Column title="Personal projects"></Column>
+          <Column columnTasks={filteredTasks.work} setTasks={setTasks} title="Work"></Column>
+          <Column columnTasks={filteredTasks.uni} setTasks={setTasks} title="Uni"></Column>
+          <Column columnTasks={filteredTasks.chores} setTasks={setTasks} title="Chores"></Column>
+          <Column columnTasks={filteredTasks.personal_projects} setTasks={setTasks} title="Personal projects"></Column>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+        <p>&copy; Taditech 2021</p>
       </footer>
     </div>
   )

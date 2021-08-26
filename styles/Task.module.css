@@ -1,9 +1,19 @@
 .task {
   background-color: #ffffff;
+  border-radius: 5px;
   margin: 3px 0;
   padding: 4px 2px;
 }
 
 .task > p {
   margin: 0.5rem 0;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 1.6rem;
+  width: "100%";
+  border-bottom: 1px solid #ededed;
 }

@@ -1,10 +1,12 @@
 import styles from '../../../styles/Task.module.css'
+import TaskActions from './TaskActions.js'
 
-export default function Task({ task }) {
+export default function Task({ task, setTasks }) {
 
   return (
     <div className={styles.task} >
-        <p>{ task }</p>
+        <TaskActions setTasks={setTasks} taskId={task._id} />
+        <p>{ task.summary }</p>
     </div>
   )
 }

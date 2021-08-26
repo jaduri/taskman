@@ -1,34 +1,64 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Task from '../composite/Task.js'
 import styles from '../../../styles/Column.module.css'
+import { createTask } from '../../../utils/api-calls.js'
 
-export default function Column({ title }) {
-  const [ tasks, setTasks ] = useState([]);
+const defaultTask = {
+  summary: "",
+  duration: 0,
+  status: "",
+  done: false,
+  notes: "",
+  deadline: undefined,
+  column: ""
+};
 
-  const [ input, setInput ] = useState("");
+export default function Column({ title, columnTasks }) {
+  const [ tasks, setTasks ] = useState(columnTasks || []);
+  const [ task, setTask ] = useState(defaultTask);
 
-  const handleInput = (event) => {
-    setInput(state => event.target.value);
+  useEffect(() => {
+    if (columnTasks) {
+      setTasks(state => columnTasks);
+    }
+  }, [columnTasks]);
+
+  const handleInput = (event, field) => {
+
+    setTask(state => ({
+      ...state,
+      [field]: event.target.value
+    }));
   }
 
   const addTask = (event) => {
     event.preventDefault();
-    setTasks(state => [...tasks, input]);
-    setInput(state => "");
+
+    createTask({
+      ...task,
+      column: title.toLowerCase().split(" ").join("_")
+    })
+    .then(res => {
+      setTasks(state => ([ ...state, res ]));
+      setTask(state => defaultTask);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   return (
-    <div className={styles.column} >
+    <div className={styles.column}>
         <div className={styles["column-head"]}>
           <h3 className={styles["column-title"]}>{ title }</h3>
           <div className={styles["add-task"]}>
             <form onSubmit={addTask} className="flex flex-grow">
-              <input value={input} onChange={handleInput} />
+              <input value={task.summary} onChange={(e) => handleInput(e, "summary")} />
               <button type="submit">Add</button>
             </form>
           </div>
         </div>
-        {tasks.map(task => <Task task={task}/>)}
+        {tasks.map(task => <Task key={task._id} setTasks={setTasks} task={task}/>)}
     </div>
   )
 }
