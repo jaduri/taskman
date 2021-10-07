@@ -1,0 +1,21 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.text-field > label {
+  margin: 2px 0;
+}
+
+.text-field > input {
+  border: 1px solid #666666;
+  border-radius: 6px;
+  margin: 2px 0;
+  padding: 5px 8px;
+}
+
+.text-field > input:focus {
+  border: 1px solid #5fa1de;
+  outline: 1px solid #5fa1de;
+}

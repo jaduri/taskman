@@ -20,4 +20,19 @@
 
 .add-task > form > input {
   flex-grow: 1;
+  border: 1px solid #999999;
+  border-radius: 6px 0 0 6px;
+  padding: 5px 8px;
+}
+
+.add-task > form > input:focus {
+  border: 1px solid #5fa1de;
+  outline: 1px solid #5fa1de;
+}
+
+.add-task > form > button {
+  flex-grow: 1;
+  border: 1px solid #666666;
+  border-radius: 0 6px 6px 0;
+  padding: 5px 8px;
 }
