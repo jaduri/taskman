@@ -1,0 +1,21 @@
+.text-btn {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 14px;
+  margin: 0 3px;
+  font-size: 0.95rem;
+}
+
+.text-btn:hover {
+  background-color: #dddddd;
+}
+
+.text-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-border {
+  border: 1px solid #000000;
+  border-radius: 4px;
+}

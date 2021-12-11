@@ -17,3 +17,22 @@
   width: "100%";
   border-bottom: 1px solid #ededed;
 }
+
+.check {
+  display: flex;
+  flex-direction: column;
+}
+
+.check-input {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.check-input-text {
+  flex-grow: 1;
+}
+
+.check-input-btn {
+  height: 30px;
+}

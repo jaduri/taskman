@@ -3,3 +3,19 @@
   justify-content: space-between;
   padding: 10px;
 }
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 10px 0;
+  font-size: 1.3rem;
+}

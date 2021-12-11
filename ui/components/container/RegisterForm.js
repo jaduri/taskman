@@ -26,6 +26,7 @@ export default function LoginForm() {
 
   return (
     <div className="small-padding">
+      <h2>Create an account</h2>
       <form onSubmit={submit}>
         <TextField
           label="name"

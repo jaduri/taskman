@@ -38,3 +38,8 @@ h3 {
 .small-padding {
   margin: 1.5rem;
 }
+
+.btn-container-center {
+  display: flex;
+  justify-content: center;
+}

@@ -80,9 +80,7 @@ export async function updateTask(taskId, taskUpdates) {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      headers: {
-        token: getToken(),
-      },
+      token: getToken(),
     },
     body: JSON.stringify(taskUpdates),
   });

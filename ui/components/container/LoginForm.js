@@ -40,6 +40,7 @@ export default function LoginForm() {
 
   return (
     <div className="small-padding">
+      <h2>Login</h2>
       <form onSubmit={submit}>
         <TextField
           label="email"

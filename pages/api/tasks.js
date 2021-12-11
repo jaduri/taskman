@@ -32,6 +32,7 @@ export default async function handler(req, res) {
       });
       break;
     case "PATCH":
+      console.log("here");
       // update a task and update local
       Task.updateOne({ _id: req.query.id }, req.body, (err, result) => {
         res.status(200).json(result);

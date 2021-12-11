@@ -63,9 +63,11 @@ export default function Column({ title, columnTasks }) {
           </form>
         </div>
       </div>
-      {tasks.map((task) => (
-        <Task key={task._id} setTasks={setTasks} task={task} />
-      ))}
+      <div className={styles["column-body"]}>
+        {tasks.map((task) => {
+          return <Task key={task._id} setTasks={setTasks} task={task} />;
+        })}
+      </div>
     </div>
   );
 }
