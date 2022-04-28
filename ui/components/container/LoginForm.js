@@ -1,15 +1,14 @@
 import { useState, useContext } from "react";
 import TextField from "../atomic/TextField.js";
-import { login, getTasks } from "../../../utils/api-calls";
 import styles from "../../../styles/IconBtn.module.css";
 
-import AppContext from "../../../utils/AppContext";
+import { useAppContext } from "../../../state/AppContext";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setUser, setTasks } = useContext(AppContext);
+  const { login } = useAppContext();
 
   const handleInput = (event, field) => {
     if (field === "email") {
@@ -22,20 +21,7 @@ export default function LoginForm() {
   const submit = async (e) => {
     e.preventDefault();
 
-    let response = await login({ email: email, password: password });
-
-    if (response.success) {
-      setUser((state) => response.user);
-      localStorage.setItem("token", response.token);
-
-      getTasks()
-        .then((res) => {
-          setTasks((state) => res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    login(email, password);
   };
 
   return (

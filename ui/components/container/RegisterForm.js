@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TextField from "../atomic/TextField.js";
-import { register } from "../../../utils/api-calls";
+import { register, getTasks } from "../../../utils/api-calls";
 import styles from "../../../styles/IconBtn.module.css";
 
-export default function LoginForm() {
+import AppContext from "../../../utils/AppContext";
+
+export default function RegisterForm() {
   const [details, setDetails] = useState({});
+
+  const { setUser, setTasks, toggleAuthModal, setLoggedIn } = useContext(
+    AppContext
+  );
 
   const handleInput = (event, field) => {
     setDetails((state) => ({
@@ -21,7 +27,22 @@ export default function LoginForm() {
       email: details.email,
       password: details.password,
     });
-    return true;
+
+    if (response.success) {
+      setUser((state) => response.user);
+      setLoggedIn(() => true);
+      localStorage.setItem("token", response.token);
+
+      getTasks()
+        .then((res) => {
+          setTasks((state) => res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      toggleAuthModal();
+    }
   };
 
   return (

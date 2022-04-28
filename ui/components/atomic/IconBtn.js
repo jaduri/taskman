@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "../../../styles/IconBtn.module.css";
 
 export default function IconBtn({ src, border = false, action = (f) => f }) {
@@ -7,7 +6,7 @@ export default function IconBtn({ src, border = false, action = (f) => f }) {
       className={`${styles["icon-btn"]} ${border && "btn-border"}`}
       onClick={action}
     >
-      <Image src={src} alt="action icon" width={16} height={16} />
+      <img src={src} alt="action icon" width={16} height={16} />
     </button>
   );
 }

@@ -12,7 +12,11 @@ export default function AuthForms() {
 
   return (
     <div>
-      {login ? <LoginForm /> : <RegisterForm />}
+      {login ? (
+        <LoginForm close={toggleAuthForm} />
+      ) : (
+        <RegisterForm close={toggleAuthForm} />
+      )}
       <div className="btn-container-center">
         <TextBtn
           action={toggleAuthForm}

@@ -1,15 +1,15 @@
 import { useState, useContext } from "react";
 import TextField from "../atomic/TextField.js";
-import { updateTask } from "../../../utils/api-calls";
+import * as taskApi from "../../../services/tasks";
 import styles from "../../../styles/Task.module.css";
+import { useAppContext } from "../../../state/AppContext.jsx";
 
-import AppContext from "../../../utils/AppContext.js";
+// import { useAppContext } from "../../../state/AppContext.jsx";
 
 export default function EditTaskForm({ task }) {
   const [updates, setUpdates] = useState(task);
   const [newItem, setNewItem] = useState("");
-
-  const { setTasks } = useContext(AppContext);
+  const { updateTask } = useAppContext();
 
   const handleInput = (event, field) => {
     setUpdates((state) => ({
@@ -36,22 +36,19 @@ export default function EditTaskForm({ task }) {
 
     let obj = {};
 
-    updateTask(task._id, { checklist: newChecklist })
-      .then((res) => {
-        setUpdates((state) => {
-          obj = {
-            ...state,
-            checklist: [...newChecklist]
-          };
-          return {...obj};
-        });
+    taskApi.updateById(task._id, { checklist: newChecklist })
+      .then(({ data }) => {
+        if (data.success) {
 
-        setTasks((state) => {
-          let index = state.findIndex(item => item._id === obj._id);
-          let newTasks = [...state];
-          newTasks[index] = {...obj};
-          return newTasks;
-        });
+          setUpdates(data.result);
+        }
+
+        // setTasks((state) => {
+        //   let index = state.findIndex(item => item._id === obj._id);
+        //   let newTasks = [...state];
+        //   newTasks[index] = {...obj};
+        //   return newTasks;
+        // });
 
         setNewItem(() => "");
       })
@@ -64,22 +61,24 @@ export default function EditTaskForm({ task }) {
     e.preventDefault();
 
     updateTask(task._id, { summary: updates.summary })
-      .then((res) => {
-        // update tasks in state here
-        setTasks((state) => {
-          let obj = {
-            ...updates,
-            summary: updates.summary
-          }
-          let index = state.findIndex(item => item._id === updates._id);
-          let newTasks = [...state];
-          newTasks[index] = {...obj};
-          return newTasks;
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    // taskApi.updateById(task._id, { summary: updates.summary })
+    //   .then((res) => {
+    //     // update tasks in state here
+    //     // setTasks((state) => {
+    //     //   let obj = {
+    //     //     ...updates,
+    //     //     summary: updates.summary
+    //     //   }
+    //     //   let index = state.findIndex(item => item._id === updates._id);
+    //     //   let newTasks = [...state];
+    //     //   newTasks[index] = {...obj};
+    //     //   return newTasks;
+    //     // });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (

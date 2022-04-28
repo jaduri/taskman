@@ -25,7 +25,9 @@ export default function Task({ task, setTasks }) {
   };
 
   useEffect(() => {
-    setChecklist(() => [...task.checklist]);
+    if (task && task.checklist) {
+      setChecklist(() => [...task.checklist]);
+    }
   }, [task]);
 
   return (
